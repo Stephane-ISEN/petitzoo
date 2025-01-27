@@ -7,10 +7,10 @@ app = FastAPI()
 
 # Configuration de la base de données MySQL
 DB_CONFIG = {
-    "host": "localhost", 
-    "port": "3307", # Remplacez par l'adresse de votre serveur MySQL
-    "user": "root",       # Remplacez par votre nom d'utilisateur MySQL
-    "password": "example",      # Remplacez par votre mot de passe MySQL
+    "host": "petitzoo-mysql", 
+    "port": "3306", # Remplacez par l'adresse de votre serveur MySQL
+    "user": "admin",       # Remplacez par votre nom d'utilisateur MySQL
+    "password": "ISEN2025",      # Remplacez par votre mot de passe MySQL
     "database": "pettitzoo"
 }
 
