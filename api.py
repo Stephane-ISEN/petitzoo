@@ -7,10 +7,10 @@ app = FastAPI()
 
 # Configuration de la base de données MySQL
 DB_CONFIG = {
-    "host": "petitzoo-mysql", 
-    "port": "3306", # Remplacez par l'adresse de votre serveur MySQL
-    "user": "admin",       # Remplacez par votre nom d'utilisateur MySQL
-    "password": "ISEN2025",      # Remplacez par votre mot de passe MySQL
+    "host": "localhost", 
+    "port": "3307", # Remplacez par l'adresse de votre serveur MySQL
+    "user": "root",       # Remplacez par votre nom d'utilisateur MySQL
+    "password": "example",      # Remplacez par votre mot de passe MySQL
     "database": "pettitzoo"
 }
 
@@ -23,7 +23,21 @@ class Animal(BaseModel):
 
 # Connexion à la base de données
 def get_db_connection():
-    return mysql.connector.connect(**DB_CONFIG)
+    connect = mysql.connector.connect(**DB_CONFIG)
+    cursor = connect.cursor()
+    cursor.execute("""
+                   CREATE TABLE IF NOT EXISTS `animaux` (
+                `id` int NOT NULL AUTO_INCREMENT,
+                `nom` varchar(250) NOT NULL,
+                `description` text NOT NULL,
+                `image` varchar(250) NOT NULL,
+                `decor` varchar(250) NOT NULL,
+                PRIMARY KEY (`id`)
+                ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+                   """)
+
+
+    return connect
 
 # Endpoint : teste le démarrage de l'API
 @app.get("/")
